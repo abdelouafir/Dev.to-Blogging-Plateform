@@ -1,0 +1,9 @@
+{
+    "name": "youcode/dev.to-blogging-plateform",
+    "autoload": {
+        "psr-4": {
+            "Youcode\\DevToBloggingPlateform\\": "src/"
+        }
+    },
+    "require": {}
+}

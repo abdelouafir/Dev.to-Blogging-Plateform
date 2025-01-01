@@ -45,7 +45,7 @@
                         <a class="inline-block py-2 px-4 text-white no-underline" href="#">Active</a>
                     </li>
                     <li class="flex-1 md:flex-none md:mr-3">
-                        <a class="inline-block py-2 px-4 text-white no-underline" href="#">ajouté artickles</a>
+                        <a class="inline-block py-2 px-4 text-white no-underline" href="./assets/php/form.php">ajouté artickles</a>
                     </li>
                     <li class="flex-1 md:flex-none md:mr-3">
                         <a class="inline-block text-gray-400 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">link</a>
@@ -79,11 +79,11 @@
 
                 <div class="md:mt-12 md:w-48 md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between">
                     <ul class="list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left">
-                        <li class="mr-3 flex-1">
+                        <!-- <li class="mr-3 flex-1">
                             <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500">
                                 <i class="fas fa-tasks pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Tasks</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="mr-3 flex-1">
                             <a href="./index.php" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
                             <i class="fa-solid fa-house-chimney md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">artickles</span>
