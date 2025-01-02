@@ -1,3 +1,6 @@
+<?php 
+namespace app\article;
+ ?>
 <header class="bg-gray-800 text-white py-6 text-center">
     <h1 class="text-3xl font-semibold">Les Articles du Jour</h1>
 </header>

@@ -2,8 +2,11 @@
     "name": "youcode/dev.to-blogging-plateform",
     "autoload": {
         "psr-4": {
-            "Youcode\\DevToBloggingPlateform\\": "src/"
+            "Config\\": "config/",
+            "App\\": "classes/"
         }
     },
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
 }

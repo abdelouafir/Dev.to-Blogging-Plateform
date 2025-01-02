@@ -1,3 +1,6 @@
+<?php 
+namespace app\form;
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

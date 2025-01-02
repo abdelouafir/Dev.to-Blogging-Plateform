@@ -1,11 +1,19 @@
 <?php
-class ConctDb {
+namespace Config;
+require_once 'C:\xampp\htdocs\Dev.to-Blogging-Plateform\vendor\autoload.php';
+
+use PDO;
+use PDOException;
+
+class Database {
+    public $test ="ahmed
+    ";
     private $host = 'localhost';
     private $db_name = 'devblog_db';
     private $username = 'root';
     private $password = '';
     private $conn;
-
+    
     public function getConnection() {
         try {
             $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
@@ -17,4 +25,7 @@ class ConctDb {
         }
     }
 }
+$testing = new Database();
+echo $testing->test;
+
 ?>

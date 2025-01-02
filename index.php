@@ -1,3 +1,16 @@
+
+
+<?php
+// require_once __DIR__ . '/vendor/autoload.php';
+// use db\ConctDb;
+
+// $conn = new ConctDb();
+// $connction = $conn->getConnection();
+// if($connction){
+//     echo "hello worled";
+// }
+//  ?>
+
 <!DOCTYPE html>
 <html lang="{{ $page->language ?? 'en' }}">
     <head>
@@ -100,8 +113,8 @@
                             </a>
                         </li>
                         <li class="mr-3 flex-1">
-                            <a href="#" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
-                                <i class="fa fa-wallet pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Payments</span>
+                            <a href="./assets/php/tages.php" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
+                            <i class="fa-sharp fa-solid fa-tag md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">tages</span>
                             </a>
                         </li>
                     </ul>

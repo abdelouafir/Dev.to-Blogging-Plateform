@@ -1,3 +1,6 @@
+<?php 
+namespace app\login;
+ ?>
 <!DOCTYPE html>
 <html lang="{{ $page->language ?? 'en' }}">
     <head>
