@@ -1,13 +1,11 @@
 <?php
 namespace Config;
-require_once 'C:\xampp\htdocs\Dev.to-Blogging-Plateform\vendor\autoload.php';
 
+// require_once 'C:\xampp\htdocs\Dev.to-Blogging-Plateform\vendor\autoload.php';
 use PDO;
 use PDOException;
 
 class Database {
-    public $test ="ahmed
-    ";
     private $host = 'localhost';
     private $db_name = 'devblog_db';
     private $username = 'root';
@@ -25,7 +23,3 @@ class Database {
         }
     }
 }
-$testing = new Database();
-echo $testing->test;
-
-?>

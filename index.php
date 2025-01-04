@@ -113,8 +113,8 @@
                             </a>
                         </li>
                         <li class="mr-3 flex-1">
-                            <a href="./assets/php/tages.php" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
-                            <i class="fa-sharp fa-solid fa-tag md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">tages</span>
+                            <a href="./assets/php/tags.php" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
+                            <i class="fa-sharp fa-solid fa-tag md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">tags</span>
                             </a>
                         </li>
                     </ul>
@@ -128,7 +128,7 @@
             <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Button</button>
 
             <?php 
-                 include './assets/php/arteckles-page.php'
+                 include './assets/php/articles-page.php'
             ?>
 
                 

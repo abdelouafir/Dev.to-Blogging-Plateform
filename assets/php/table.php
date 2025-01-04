@@ -1,5 +1,5 @@
 <?php 
-namespace app\table;
+namespace App\table;
  ?>
 <div class="mt-8 w-full	">
     <h4 class="text-gray-600">Wide Table</h4>
