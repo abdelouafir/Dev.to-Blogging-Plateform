@@ -1,5 +1,4 @@
 <?php 
-// namespace app\article;
 require_once dirname(__FILE__, 3).'/vendor/autoload.php';
 require_once dirname(__FILE__, 3).'/classes/Article.php';
 use Config\Database;
@@ -9,15 +8,36 @@ $article = new article();
 $category = $article->get_categories($conction);
 $tags = $article->get_tags($conction);
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $title = $_POST['title'];  
+    $content = $_POST['content'];  
+    $categories = $_POST['categories'];  
+    $tags = $_POST['tags'] ?? [];  
 
- ?>
+    echo "Titre : " . htmlspecialchars($title) . "<br>";
+    echo "Contenu : " . nl2br(htmlspecialchars($content)) . "<br>";
+
+    echo "Catégories sélectionnées : <br>";
+    echo "category : " . nl2br(htmlspecialchars($categories)) . "<br>";
+    
+
+    echo "Tags sélectionnés : <br>";
+    foreach ($tags as $tagId) {
+        echo "Tag : " . htmlspecialchars($tagId) . "<br>";
+    }
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un Article</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/f01941449c.js" crossorigin="anonymous"></script>
+    <title>Articles Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
@@ -52,28 +72,22 @@ $tags = $article->get_tags($conction);
 
             <!-- Catégories -->
             <div class="mb-4">
-                <label for="category" class="block text-gray-600 mb-2">Catégorie</label>
-                <select 
-                    id="category" 
-                    name="category" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                    required>
-                    <?php foreach($category as $cat){?>
-                    <option value=""><?=$cat['name'] ?></option>
-                    <?php }?>
+                <label for="categories" class="block text-gray-600 mb-2">Catégories</label>
+                <select id="categories" name="categories"  class="mt-2 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <?php foreach($category as $cat): ?>
+                    <option value="<?php echo $cat['id']?>"><?php echo $cat['name'];?></option>
+                    <?php endforeach; ?>    
                 </select>
             </div>
 
             <!-- Tags -->
             <div class="mb-4">
-                <label for="tags" class="block text-gray-600 mb-2">Tags (séparés par des virgules)</label>
-                <input 
-                    type="text" 
-                    id="tags" 
-                    name="tags" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                    placeholder="Ex: PHP, MySQL, Tailwind"
-                />
+                <label for="tags" class="block text-gray-600 mb-2">Tags</label>
+                <select id="tags" name="tags[]" multiple class="mt-2 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <?php foreach($tags as $tag): ?>
+                    <option value="<?php echo $tag['id']?>"><?php echo $tag['name'];?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             
             <!-- Bouton de soumission -->
@@ -86,5 +100,15 @@ $tags = $article->get_tags($conction);
             </div>
         </form>
     </div>
+
+   
+    <script>
+    new TomSelect("#tags", {
+        maxItems: 10,
+        create: false,
+        placeholder: 'Select tags...',
+    });
+   </script>
 </body>
 </html>
+
