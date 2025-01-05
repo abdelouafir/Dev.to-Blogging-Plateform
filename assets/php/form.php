@@ -1,5 +1,15 @@
 <?php 
-namespace app\form;
+// namespace app\article;
+require_once dirname(__FILE__, 3).'/vendor/autoload.php';
+require_once dirname(__FILE__, 3).'/classes/Article.php';
+use Config\Database;
+$conn = new Database();
+$conction = $conn->getConnection();
+$article = new article();
+$category = $article->get_categories($conction);
+$tags = $article->get_tags($conction);
+
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,10 +58,9 @@ namespace app\form;
                     name="category" 
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
                     required>
-                    <option value="">-- Sélectionnez une catégorie --</option>
-                    <option value="Tech">Tech</option>
-                    <option value="Lifestyle">Lifestyle</option>
-                    <option value="Education">Education</option>
+                    <?php foreach($category as $cat){?>
+                    <option value=""><?=$cat['name'] ?></option>
+                    <?php }?>
                 </select>
             </div>
 

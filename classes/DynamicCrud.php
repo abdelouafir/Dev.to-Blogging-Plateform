@@ -1,5 +1,6 @@
 <?php 
-
+// namespace App;
+use PDO;
 class DynamicCrud {
   private $name;
   private $id;
