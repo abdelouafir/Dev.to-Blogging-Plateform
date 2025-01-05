@@ -9,22 +9,15 @@ $category = $article->get_categories($conction);
 $tags = $article->get_tags($conction);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $auter = 1;
     $title = $_POST['title'];  
     $content = $_POST['content'];  
     $categories = $_POST['categories'];  
     $tags = $_POST['tags'] ?? [];  
-
-    echo "Titre : " . htmlspecialchars($title) . "<br>";
-    echo "Contenu : " . nl2br(htmlspecialchars($content)) . "<br>";
-
-    echo "Catégories sélectionnées : <br>";
-    echo "category : " . nl2br(htmlspecialchars($categories)) . "<br>";
+    $article->add_article($conction,$title,$content,$categories,$auter);
+    $article_id = $article->add_article($conction,$title,$content,$categories,$auter);
+    $article->create_tag($conction,$article_id,$tags);
     
-
-    echo "Tags sélectionnés : <br>";
-    foreach ($tags as $tagId) {
-        echo "Tag : " . htmlspecialchars($tagId) . "<br>";
-    }
 }
 ?>
 <!DOCTYPE html>
