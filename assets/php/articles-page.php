@@ -6,9 +6,10 @@ use Config\Database;
 $conn = new Database();
 $conction = $conn->getConnection();
 $article = new article();
-$tester = $article->ajoute_article($conction);
-// var_dump($tester);   
 
+
+$articles = $article->ajoute_article($conction);
+// var_dump($articles);
 
  ?>
 <!DOCTYPE html>
@@ -74,31 +75,33 @@ $tester = $article->ajoute_article($conction);
     </nav>
 </header>
 
-<div class="container mx-auto p-6  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-1/2">
+<div class="container mx-auto p-6  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-1/2 ">
     <!-- Article 1 -->
-    <div class="flex items-center">
+    <?php foreach($articles as $article) {?>
+    <div class="flex items-center mt-20	">
             <div class="flex-shrink-0 h-10 w-10">
                 
                 <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
             </div>
 
             <div class="ml-4">
-                <div class="text-sm leading-5 font-medium text-gray-900">John Doe</div>
+                <div class="text-sm leading-5 font-medium text-gray-900"><?= $article['username'];?></div>
                 <!-- <div class="text-sm leading-5 text-gray-500">john@example.com</div> -->
             </div>
         </div>
     <div class="bg-white rounded-lg shadow-lg overflow-hidden">
     
         <!-- <img class="w-full h-48 object-cover" src="https://via.placeholder.com/300x200" alt="Article Image"> -->
-        <div class="p-4">
-            <h3 class="text-xl font-bold text-gray-800">Titre de l'Article 1</h3>
-            <p class="text-gray-600 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+        <div class="p-4 ">
+            <h3 class="text-xl font-bold text-gray-800"><?=$article['title']?></h3>
+            <p class="text-gray-600 mt-2"><?=$article['content']?></p>
             <div class="mt-4">
-                <span class="inline-block bg-blue-500 text-white text-xs font-semibold py-1 px-2 rounded-full mr-2">Sport</span>
+                <span class="inline-block bg-blue-500 text-white text-xs font-semibold py-1 px-2 rounded-full mr-2"><?=$article['category_name']?></span>
                 <span class="inline-block bg-green-500 text-white text-xs font-semibold py-1 px-2 rounded-full">Actualité</span>
             </div>
         </div>
     </div>
+    <?php }?>
 
 </div>
 

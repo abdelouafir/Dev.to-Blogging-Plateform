@@ -1,9 +1,6 @@
 <?php 
 
 class article{
-    private $category = [];
-    private $tags = [];
-
 
     public function get_categories($pdo) {
         $stmt = $pdo->prepare("SELECT * FROM categories");
@@ -75,6 +72,7 @@ class article{
 
     public function ajoute_article($pdo) {
         $sql = "SELECT 
+           articles.id,
            articles.title,
            articles.content,
            users.username,
@@ -87,7 +85,6 @@ class article{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
-    
 }
 
 ?>
