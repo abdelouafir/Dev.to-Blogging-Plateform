@@ -72,6 +72,22 @@ class article{
         }
         return true;
     }
+
+    public function ajoute_article($pdo) {
+        $sql = "SELECT 
+           articles.title,
+           articles.content,
+           users.username,
+           categories.name AS category_name
+        FROM articles
+        JOIN users ON users.id = articles.author_id
+        JOIN categories ON categories.id = articles.category_id;
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); 
+    }
+    
 }
 
 ?>

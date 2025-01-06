@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $article->add_article($conction,$title,$content,$categories,$auter);
     $article_id = $article->add_article($conction,$title,$content,$categories,$auter);
     $article->create_tag($conction,$article_id,$tags);
-    
 }
 ?>
 <!DOCTYPE html>

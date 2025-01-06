@@ -5,7 +5,7 @@ require_once dirname(__FILE__, 2).'/classes/category.php';
 use Config\Database;
 $conn = new Database();
 $conction = $conn->getConnection();
-$id ;
+$id='';
 $ins = new category();
 
 if (isset($_POST['category_id'])) {
@@ -14,12 +14,12 @@ if (isset($_POST['category_id'])) {
     
 }
 
-if (isset($_POST['submit']) && isset($_POST['title'])) {
-    $tag_update = $_POST['title'];
-    $update_result = category::update_category($conction, $id, $tag_update);
-    
+if (isset($_POST['title']) && !empty($id)) {
+  var_dump($id);
+    $category_id = $_POST['title'];
+    $update_result = category::update_category($conction, $id, $category_id);
     if ($update_result) {
-        echo $tag_update . "apdetad";
+        echo $category_id . "apdetad";
         var_dump($id);
     } else {
         echo "erore";
@@ -43,7 +43,9 @@ if (isset($_POST['submit']) && isset($_POST['title'])) {
     <!-- Formulaire pour ajouter un nouveau tag -->
     <div class="bg-white p-6 rounded-lg shadow-lg">
       <h2 class="text-2xl font-semibold text-gray-700 mb-4">modifaucation un category</h2>
-      <form action="/assets/php/category_vew.php" method="POST">
+      <form action="./update_category.php" method="POST">
+      <input type="hidden" name="category_id" value="<?= isset($id) ? $id : '' ?>">
+
         <div class="mb-4">
           <label for="title" class="block text-gray-600 font-medium">Nom du Tag:</label>
           <input type="text" id="title" name="title" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?=  $update['name'] ?>">
@@ -55,3 +57,17 @@ if (isset($_POST['submit']) && isset($_POST['title'])) {
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
