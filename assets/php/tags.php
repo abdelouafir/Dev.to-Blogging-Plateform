@@ -71,8 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
               <button type="submit" class="ml-2 bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-600">Mettre à jour</button>
               </form>
               <form action="./tags.php" method="POST" class="inline-block ml-2">
-              <input type="hidden" name="id" value="<?php echo $tag['id']; ?>">
-              <button type="submit" class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600">Supprimer</button>
+                 <input type="hidden" name="id" value="<?php echo $tag['id']; ?>">
+                 <button type="submit" class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600">Supprimer</button>
               </form>
             </td>
           </tr>

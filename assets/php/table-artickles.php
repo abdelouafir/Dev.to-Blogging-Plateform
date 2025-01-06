@@ -7,6 +7,15 @@ $conction = $conn->getConnection();
 $article = new article();
 $articles = $article->ajoute_article($conction);
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['supprimer_id'])) {
+    $id = $_POST['supprimer_id'];
+    if ($article->suprmre_article($conction, $id)) {
+        header("Location: ./table-artickles.php");
+        exit;
+    } else {
+        echo "ERORE";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -19,7 +28,6 @@ $articles = $article->ajoute_article($conction);
 <body class="bg-gray-100 p-8">
     <div class="container mx-auto">
         <h1 class="text-3xl font-bold mb-6 text-gray-700 text-center">Gestion des Articles</h1>
-
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
                 <thead class="bg-gray-200 text-gray-600 text-sm uppercase font-medium">
@@ -43,8 +51,14 @@ $articles = $article->ajoute_article($conction);
                         <td class="py-3 px-6 text-center">150</td>
                         <td class="py-3 px-6 text-center">
                             <div class="flex justify-center space-x-4">
-                                <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Modifier</button>
-                                <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Supprimer</button>
+                                <form action="/ruturn/updet_article.php" method="POST">
+                                    <input type="hidden" name="update_id" value="<?php echo $article['id']; ?>">
+                                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Modifier</button>
+                                </form>
+                                <form action="./table-artickles.php" method="POST">
+                                    <input type="hidden" name="supprimer_id" value="<?php echo $article['id']; ?>">
+                                    <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">superimer</button>
+                                </form>
                             </div>
                         </td>
                     </tr>

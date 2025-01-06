@@ -102,9 +102,7 @@ $articles = $article->ajoute_article($conction);
         </div>
     </div>
     <?php }?>
-
 </div>
-
 </body>
 </html>
 

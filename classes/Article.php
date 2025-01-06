@@ -85,6 +85,45 @@ class article{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
+    public function suprmre_article($connection, $id) {
+        $sql = "DELETE FROM articles WHERE id = :id";
+        $stmt = $connection->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    public function update_article($pdo, $id, $title, $content, $category_id) {
+        $sql = "UPDATE articles 
+                SET title = :title, content = :content, category_id = :category_id 
+                WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+        $stmt->bindParam(':content', $content, PDO::PARAM_STR);
+        $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    
+    
+        if ($stmt->execute()) {
+            return true; 
+        } else {
+            echo "Une erreur est survenue lors de la mise à jour de l'article.";
+            return false; 
+        }
+    }
+
+    public function getarticle($pdo,$id){
+        $stmt = $pdo->prepare("SELECT * FROM articles WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT); 
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);    
+    }
+    
+    public function delete_old_tags($pdo,$id){
+        $stmt = $pdo->prepare("DELETE FROM article_tags WHERE article_id  = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT); 
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);  
+    }
 }
 
 ?>
