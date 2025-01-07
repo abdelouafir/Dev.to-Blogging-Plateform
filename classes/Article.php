@@ -91,7 +91,6 @@ class article{
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
-
     public function update_article($pdo, $id, $title, $content, $category_id) {
         $sql = "UPDATE articles 
                 SET title = :title, content = :content, category_id = :category_id 

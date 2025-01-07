@@ -1,16 +1,15 @@
 <?php 
 // namespace app\article;
-require_once dirname(__FILE__, 3).'/vendor/autoload.php';
-require_once dirname(__FILE__, 3).'/classes/Article.php';
+require_once dirname(__FILE__, 2).'/vendor/autoload.php';
+require_once dirname(__FILE__, 2).'/classes/Article.php';
 use Config\Database;
 $conn = new Database();
 $conction = $conn->getConnection();
 $article = new article();
-
-
 $articles = $article->ajoute_article($conction);
 // var_dump($articles);
-
+session_start();
+var_dump($_SESSION['user'])
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,22 +48,34 @@ $articles = $article->ajoute_article($conction);
                     <li class="flex-1 md:flex-none md:mr-3">
                         <a class="inline-block py-2 px-4 text-white no-underline" href="#">Active</a>
                     </li>
-                    <li class="flex-1 md:flex-none md:mr-3">
+                    <!-- <li class="flex-1 md:flex-none md:mr-3">
                         <a class="inline-block py-2 px-4 text-white no-underline" href="/assets/php/form.php">ajouté artickles</a>
-                    </li>
+                    </li> -->
                     <li class="flex-1 md:flex-none md:mr-3">
                         <a class="inline-block text-gray-400 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">link</a>
                     </li>
                     <li class="flex-1 md:flex-none md:mr-3">
                         <div class="relative inline-block">
-                            <button onclick="toggleDD('myDropdown')" class="drop-button text-white py-2 px-2"> <span class="pr-2"><i class="em em-robot_face"></i></span> Hi, User <svg class="h-3 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <button onclick="toggleDD('myDropdown')" class="drop-button text-white py-2 px-2"> <span class="pr-2"><i class="em em-robot_face"></i></span> Hi, <?php echo $_SESSION['user']['username']; ?> <svg class="h-3 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg></button>
                             <div id="myDropdown" class="dropdownlist absolute bg-gray-800 text-white right-0 mt-3 p-3 overflow-auto z-30 invisible">
                                 <input type="text" class="drop-search p-2 text-gray-600" placeholder="Search.." id="myInput" onkeyup="filterDD('myDropdown','myInput')">
-                                <a href="#" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fa fa-user fa-fw"></i> Profile</a>
+                                <!-- <a href="./login.php" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fa fa-user fa-fw"></i> login</a> -->
+                                <?php if (isset($_SESSION['user'])): ?>
+                                    <a href="./logout.php" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block">
+                                        <i class="fas fa-sign-out-alt fa-fw"></i> Log out
+                                    </a>
+                                <?php else: ?>
+                                    <a href="./login.php" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block">
+                                        <i class="fa fa-user fa-fw"></i> login
+                                    </a>
+                                    <a href="./sin-up.php" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fa fa-user fa-fw"></i> Sign up
+                                </a>
+
+                                <?php endif; ?>
                                 <a href="#" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fa fa-cog fa-fw"></i> Settings</a>
                                 <div class="border border-gray-800"></div>
-                                <a href="#" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a>
+                                <!-- <a href="#" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a> -->
                             </div>
                         </div>
                     </li>
@@ -76,6 +87,16 @@ $articles = $article->ajoute_article($conction);
 </header>
 
 <div class="container mx-auto p-6  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-1/2 ">
+<div class="flex justify-end mb-6">
+        <a href="/assets/php/form.php" 
+        class="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+            </svg>
+            Ajouter new article
+        </a>
+    </div>
+
     <!-- Article 1 -->
     <?php foreach($articles as $article) {?>
     <div class="flex items-center mt-20	">
@@ -103,6 +124,39 @@ $articles = $article->ajoute_article($conction);
     </div>
     <?php }?>
 </div>
+<script>
+    /*Toggle dropdown list*/
+    function toggleDD(myDropMenu) {
+        document.getElementById(myDropMenu).classList.toggle("invisible");
+    }
+    /*Filter dropdown options*/
+    function filterDD(myDropMenu, myDropMenuSearch) {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById(myDropMenuSearch);
+        filter = input.value.toUpperCase();
+        div = document.getElementById(myDropMenu);
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.drop-button') && !event.target.matches('.drop-search')) {
+            var dropdowns = document.getElementsByClassName("dropdownlist");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (!openDropdown.classList.contains('invisible')) {
+                    openDropdown.classList.add('invisible');
+                }
+            }
+        }
+    }
+</script>
 </body>
 </html>
 

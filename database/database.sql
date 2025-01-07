@@ -12,8 +12,8 @@
         username VARCHAR(20) NOT NULL UNIQUE,
         email VARCHAR(255) NOT NULL UNIQUE,
         password_hash VARCHAR(255) NOT NULL,
-        bio TEXT,
-        profile_picture_url VARCHAR(255)
+        profile_picture_url VARCHAR(255),0
+        role ENUM('user', 'admin', 'author') NOT NULL DEFAULT 'user'
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
     -- Create categories table
