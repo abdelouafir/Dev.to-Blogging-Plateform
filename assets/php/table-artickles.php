@@ -53,11 +53,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['supprimer_id'])) {
                             <div class="flex justify-center space-x-4">
                                 <form action="/ruturn/updet_article.php" method="POST">
                                     <input type="hidden" name="update_id" value="<?php echo $article['id']; ?>">
-                                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Modifier</button>
+                                    <button class=" text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+                                    <i class="fa-solid fa-circle-check" style="color: #1662e3;"></i>
+                                    </button>
                                 </form>
                                 <form action="./table-artickles.php" method="POST">
                                     <input type="hidden" name="supprimer_id" value="<?php echo $article['id']; ?>">
-                                    <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">superimer</button>
+                                    <button class="text-white px-4 py-2 rounded hover:bg-red-600 transition">
+                                    <i class="fa-solid fa-user-minus" style="color: #ff0000;"></i>
+                                     </button>
                                 </form>
                             </div>
                         </td>

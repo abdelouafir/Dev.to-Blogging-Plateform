@@ -14,25 +14,6 @@ class article{
         return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
 
-    // public function add_article($pdo, $title, $content, $category_id, $author_id) {
-    
-    //     $sql = "INSERT INTO articles (title, content, category_id, author_id, views)
-    //             VALUES (:title, :content, :category_id, :author_id, :views)";
-    //     $stmt = $pdo->prepare($sql);
-        
-    //     $stmt->bindParam(':title', $title);
-    //     $stmt->bindParam(':content', $content);
-    //     $stmt->bindParam(':category_id', $category_id);
-    //     $stmt->bindParam(':author_id', $author_id);
-    //     $stmt->bindValue(':views', 0); 
-        
-    
-    //     if ($stmt->execute()) {
-    //         echo "article add";
-    //     } else {
-    //         echo "errore";
-    //     }
-    // }
 
     public function add_article($pdo, $title, $content, $category_id, $author_id) {
         $sql = "INSERT INTO articles (title, content, category_id, author_id, views)
@@ -123,6 +104,25 @@ class article{
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);  
     }
+
+    public function get_les_articles_active($pdo) {
+        $sql = "SELECT 
+                   articles.id,
+                   articles.title,
+                   articles.content,
+                   users.username,
+                   categories.name AS category_name
+                FROM articles
+                JOIN users ON users.id = articles.author_id
+                JOIN categories ON categories.id = articles.category_id
+                WHERE articles.status = 'active';"; 
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
+
 
 ?>

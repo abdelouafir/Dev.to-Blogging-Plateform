@@ -7,9 +7,10 @@ $conn = new Database();
 $conction = $conn->getConnection();
 $article = new article();
 $articles = $article->ajoute_article($conction);
+$articles_active =  $article->get_les_articles_active($conction);
 // var_dump($articles);
 session_start();
-var_dump($_SESSION['user'])
+// var_dump($_SESSION['user'])
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +57,7 @@ var_dump($_SESSION['user'])
                     </li>
                     <li class="flex-1 md:flex-none md:mr-3">
                         <div class="relative inline-block">
-                            <button onclick="toggleDD('myDropdown')" class="drop-button text-white py-2 px-2"> <span class="pr-2"><i class="em em-robot_face"></i></span> Hi, <?php echo $_SESSION['user']['username']; ?> <svg class="h-3 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <button onclick="toggleDD('myDropdown')" class="drop-button text-white py-2 px-2"> <span class="pr-2"><i class="em em-robot_face"></i></span> Hi,  <svg class="h-3 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg></button>
                             <div id="myDropdown" class="dropdownlist absolute bg-gray-800 text-white right-0 mt-3 p-3 overflow-auto z-30 invisible">
                                 <input type="text" class="drop-search p-2 text-gray-600" placeholder="Search.." id="myInput" onkeyup="filterDD('myDropdown','myInput')">
@@ -98,7 +99,7 @@ var_dump($_SESSION['user'])
     </div>
 
     <!-- Article 1 -->
-    <?php foreach($articles as $article) {?>
+    <?php foreach($articles_active as $article) {?>
     <div class="flex items-center mt-20	">
             <div class="flex-shrink-0 h-10 w-10">
                 
