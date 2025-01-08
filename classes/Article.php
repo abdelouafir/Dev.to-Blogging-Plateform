@@ -56,6 +56,7 @@ class article{
            articles.id,
            articles.title,
            articles.content,
+           articles.status,
            users.username,
            categories.name AS category_name
         FROM articles
@@ -122,6 +123,19 @@ class article{
         
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function update_status($pdo, $id) {
+        $status = 'active';
+        $sql = "UPDATE articles 
+                SET status = :status
+                WHERE id = :id";
+    
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    
 }
 
 

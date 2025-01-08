@@ -6,7 +6,6 @@ $conn = new Database();
 $conction = $conn->getConnection();
 $article = new article();
 $articles = $article->ajoute_article($conction);
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['supprimer_id'])) {
     $id = $_POST['supprimer_id'];
     if ($article->suprmre_article($conction, $id)) {
@@ -15,7 +14,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['supprimer_id'])) {
     } else {
         echo "ERORE";
     }
+}else if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_id'])){
+    $id = $_POST['update_id'];
+    if ($article->update_status($conction, $id)) {
+        header("Location: ./table-artickles.php");
+        exit;
+    } else {
+        echo "ERORE";
+    }
 }
+// var_dump($articles);
+// session_start();
+// var_dump($_SESSION['user']);
+// var_dump($_SESSION['user']['id']);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -36,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['supprimer_id'])) {
                         <th class="py-3 px-6 text-left">Titre</th>
                         <th class="py-3 px-6 text-left">Catégorie</th>
                         <th class="py-3 px-6 text-left">Auteur</th>
+                        <th class="py-3 px-6 text-left">status</th>
                         <th class="py-3 px-6 text-center">Vues</th>
                         <th class="py-3 px-6 text-center">Actions</th>
                     </tr>
@@ -48,16 +60,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['supprimer_id'])) {
                         <td class="py-3 px-6"><?=$article['title'] ?></td>
                         <td class="py-3 px-6"><?=$article['category_name']?></td>
                         <td class="py-3 px-6"><?=$article['username']?></td>
+                        <td class="py-3 px-6"><?=$article['status']?></td>
                         <td class="py-3 px-6 text-center">150</td>
                         <td class="py-3 px-6 text-center">
                             <div class="flex justify-center space-x-4">
-                                <form action="/ruturn/updet_article.php" method="POST">
+                                <form action="/includes/management_artickles.php" method="POST">
                                     <input type="hidden" name="update_id" value="<?php echo $article['id']; ?>">
                                     <button class=" text-white px-4 py-2 rounded hover:bg-blue-600 transition">
                                     <i class="fa-solid fa-circle-check" style="color: #1662e3;"></i>
                                     </button>
                                 </form>
-                                <form action="./table-artickles.php" method="POST">
+                                <form action="/includes/management_artickles.php" method="POST">
                                     <input type="hidden" name="supprimer_id" value="<?php echo $article['id']; ?>">
                                     <button class="text-white px-4 py-2 rounded hover:bg-red-600 transition">
                                     <i class="fa-solid fa-user-minus" style="color: #ff0000;"></i>

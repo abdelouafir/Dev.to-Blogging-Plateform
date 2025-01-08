@@ -8,6 +8,8 @@ $article = new article();
 $category = $article->get_categories($conction);
 $tags = $article->get_tags($conction);
 
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $auter = 1;
     $title = $_POST['title'];  

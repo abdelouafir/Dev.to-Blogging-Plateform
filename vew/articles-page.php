@@ -10,7 +10,8 @@ $articles = $article->ajoute_article($conction);
 $articles_active =  $article->get_les_articles_active($conction);
 // var_dump($articles);
 session_start();
-// var_dump($_SESSION['user'])
+// var_dump($_SESSION['user']);
+var_dump($_SESSION['user']['id']);
  ?>
 <!DOCTYPE html>
 <html lang="en">
