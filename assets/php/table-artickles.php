@@ -11,17 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['supprimer_id'])) {
     if ($article->suprmre_article($conction, $id)) {
         header("Location: ./table-artickles.php");
         exit;
-    } else {
-        echo "ERORE";
-    }
+    } 
 }else if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_id'])){
     $id = $_POST['update_id'];
     if ($article->update_status($conction, $id)) {
         header("Location: ./table-artickles.php");
         exit;
-    } else {
-        echo "ERORE";
-    }
+    } 
 }
 // var_dump($articles);
 // session_start();

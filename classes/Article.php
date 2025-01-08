@@ -127,14 +127,21 @@ class article{
     public function update_status($pdo, $id) {
         $status = 'active';
         $sql = "UPDATE articles 
-                SET status = :status
+                SET role = :role
                 WHERE id = :id";
     
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        $stmt->bindParam(':role', $status, PDO::PARAM_STR);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
+    
+        try {
+            return $stmt->execute(); 
+        } catch (PDOException $e) {
+            error_log("Erreur : " . $e->getMessage()); 
+            return false;
+        }
     }
+    
     
 }
 

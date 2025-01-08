@@ -17,7 +17,7 @@ class User {
     }
     
     public function get_all_users ($pdo){
-        $sql = "SELECT username,email,password_hash FROM users";
+        $sql = "SELECT id,username,role,email,password_hash FROM users";
         $stmt = $pdo->prepare($sql);
         if($stmt->execute()){
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -50,5 +50,38 @@ class User {
             ];
         }
     }
+
+    public function update_role_user($pdo, $id) {
+        $role = 'author';
+        $sql = "UPDATE users 
+                SET role = :role
+                WHERE id = :id";
+    
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':role', $role, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    
+        try {
+            return $stmt->execute(); 
+        } catch (PDOException $e) {
+            error_log("Erreur : " . $e->getMessage()); 
+            return false;
+        }
+    }
+
+    public function delete_user($pdo, $id) {
+        $sql = "DELETE FROM users WHERE id = :id";
+    
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Erreur : " . $e->getMessage());
+            return false;
+        }
+    }
+    
 }
 ?>

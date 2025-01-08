@@ -4,12 +4,35 @@
 var_dump(dirname(__FILE__,3));
 require_once dirname(__FILE__, 3).'/vendor/autoload.php';
 require_once dirname(__FILE__, 3).'/classes/User.php';
+require_once dirname(__FILE__, 3).'/classes/Article.php';
+
 use Config\Database;
 $conn = new Database();
 $conction = $conn->getConnection();
-$article = new User();
-$users = $article->get_all_users($conction);
+$users_updt = new User();
+$users = $users_updt->get_all_users($conction);
+$article_get = new article();
+$articles = $article_get->ajoute_article($conction);
 // var_dump($users);
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['supprimer_id'])) {
+    $id = $_POST['supprimer_id'];
+    if ($users_updt->delete_user($conction, $id)) {
+        header("Location: ../../includes/mangment_users.php");
+        exit;
+    } 
+}if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_id'])) {
+    $id = $_POST['update_id'];
+    if ($users_updt->update_role_user($conction, $id)) {
+        echo "Mise à jour réussie.";
+        header("Location: ../../includes/mangment_users.php");
+        exit;
+    } else {
+        echo "Échec de la mise à jour.";
+    }
+} else {
+    echo "Requête invalide ou 'update_id' manquant.";
+}
+
 ?>
 
 <div class="mt-8 w-full	">
@@ -50,11 +73,26 @@ $users = $article->get_all_users($conction);
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
                             </td>
 
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">user</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$user['role'] ?></td>
 
                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900"><i class="fa-duotone fa-solid fa-ban"></i></a>
-                                
+                            <!-- <button class=" text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+                                        <i class="fa-solid fa-circle-check" style="color: #1662e3;"></i>
+                                    </button> -->
+                                <div class="flex justify-center space-x-4">
+                                    <form action="../assets/php/table.php" method="POST">
+                                        <input type="hidden" name="update_id" value="<?php echo $user['id']; ?>">
+                                        <button class=" text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+                                        <i class="fa-solid fa-circle-check" style="color: #1662e3;"></i>
+                                    </button>
+                                    </form>
+                                    <form action="../assets/php/table.php" method="POST">
+                                        <input type="hidden" name="supprimer_id" value="<?php echo $user['id']; ?>">
+                                        <button class="text-white px-4 py-2 rounded hover:bg-red-600 transition">
+                                        <i class="fa-solid fa-user-minus" style="color: #ff0000;"></i>
+                                        </button>
+                                    </form> 
+                                </div>
                             </td>
                         </tr>
                       <?php } ?>
