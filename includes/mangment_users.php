@@ -1,5 +1,5 @@
 <?php 
-require_once dirname(__FILE__, 2).'/vendor/autoloagd.php';
+require_once dirname(__FILE__, 2).'/vendor/autoload.php';
 require_once dirname(__FILE__, 2).'/classes/User.php';
 require_once dirname(__FILE__, 2).'/classes/Article.php';
 

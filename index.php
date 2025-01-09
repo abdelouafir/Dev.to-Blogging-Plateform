@@ -1,14 +1,7 @@
 
 
 <?php
-// require_once __DIR__ . '/vendor/autoload.php';
-// use db\ConctDb;
 
-// $conn = new ConctDb();
-// $connction = $conn->getConnection();
-// if($connction){
-//     echo "hello worled";
-// }
  ?>
 
 <!DOCTYPE html>
@@ -30,9 +23,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body>
-        <header>
+    <header>
     <!--Nav-->
-    <nav aria-label="menu nav" class="bg-gray-800 pt-2 md:pt-1 pb-1 px-1 mt-0 h-auto fixed w-full z-20 top-0">
+    <nav aria-label="menu nav" class="bg-gray-800 pt-2 md:pt-1 pb-1 px-1 mt-0 h-auto  w-full z-20 top-0">
 
         <div class="flex flex-wrap items-center">
             <div class="flex flex-shrink md:w-1/3 justify-center md:justify-start text-white">
@@ -88,7 +81,7 @@
 
     <div class="flex flex-col md:flex-row">
         <nav aria-label="alternative nav">
-            <div class="bg-gray-800 shadow-xl h-20 fixed bottom-0 mt-12 md:relative md:h-screen z-10 w-full md:w-48 content-center" style="width: 280px;">
+            <div class="bg-gray-800 shadow-xl h-20 fixed bottom-0 mt-12 md:relative md:h-screen z-10 w-full md:w-48 content-center" style="width: 280px; margin:0px">
 
                 <div class="md:mt-12 md:w-48 md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between">
                     <ul class="list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left">
@@ -99,7 +92,7 @@
                         </li> -->
                         <li class="mr-3 flex-1">
                             <a href="./vew/articles-page.php" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
-                            <i class="fa-solid fa-house-chimney md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">artickles</span>
+                            <i class="fa-solid fa-house-chimney md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">articles</span>
                             </a>
                         </li>
                         <li class="mr-3 flex-1">
@@ -129,15 +122,81 @@
             </div>
         </nav>
         <section class="w-full">
-            <div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5">
-            <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Button</button>
 
-            <?php 
-                //  include './assets/php/articles-page.php'
-            ?>
 
-                
-            </div>
+
+                <body class="bg-gray-100 text-gray-800">
+                    <div class="container mx-auto p-4">
+                        <h1 class="text-3xl font-bold text-center mb-6 text-blue-600">Statistiques</h1>
+
+                        <!-- Statistiques générales -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                            <!-- Card Stage -->
+                            <div class="bg-white p-6 rounded-lg shadow-md">
+                                <h2 class="text-xl font-semibold text-gray-700">articles</h2>
+                                <p class="text-3xl font-bold text-blue-500 mt-4">12</p>
+                            </div>
+                            <!-- Card Utilisateurs -->
+                            <div class="bg-white p-6 rounded-lg shadow-md">
+                                <h2 class="text-xl font-semibold text-gray-700">Utilisateurs</h2>
+                                <p class="text-3xl font-bold text-green-500 mt-4">45</p>
+                            </div>
+                            <!-- Card Catégories -->
+                            <div class="bg-white p-6 rounded-lg shadow-md">
+                                <h2 class="text-xl font-semibold text-gray-700">Catégories</h2>
+                                <p class="text-3xl font-bold text-purple-500 mt-4">8</p>
+                            </div>
+                            <!-- Card Tags -->
+                            <div class="bg-white p-6 rounded-lg shadow-md">
+                                <h2 class="text-xl font-semibold text-gray-700">Tags</h2>
+                                <p class="text-3xl font-bold text-red-500 mt-4">23</p>
+                            </div>
+                        </div>
+
+                        <!-- Tableau des données -->
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Détails des données</h2>
+                            <table class="table-auto w-full border-collapse border border-gray-300">
+                                <thead>
+                                    <tr class="bg-gray-200">
+                                        <th class="border border-gray-300 px-4 py-2 text-left">Nom</th>
+                                        <th class="border border-gray-300 px-4 py-2 text-left">Type</th>
+                                        <th class="border border-gray-300 px-4 py-2 text-left">Nombre</th>
+                                        <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-gray-100">
+                                        <td class="border border-gray-300 px-4 py-2">Stage 1</td>
+                                        <td class="border border-gray-300 px-4 py-2">Stage</td>
+                                        <td class="border border-gray-300 px-4 py-2">5</td>
+                                        <td class="border border-gray-300 px-4 py-2">
+                                            <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Voir</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-100">
+                                        <td class="border border-gray-300 px-4 py-2">Utilisateur 1</td>
+                                        <td class="border border-gray-300 px-4 py-2">Utilisateur</td>
+                                        <td class="border border-gray-300 px-4 py-2">12</td>
+                                        <td class="border border-gray-300 px-4 py-2">
+                                            <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Voir</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-100">
+                                        <td class="border border-gray-300 px-4 py-2">Catégorie A</td>
+                                        <td class="border border-gray-300 px-4 py-2">Catégorie</td>
+                                        <td class="border border-gray-300 px-4 py-2">3</td>
+                                        <td class="border border-gray-300 px-4 py-2">
+                                            <button class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Voir</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </body>
+
+
         </section>
     </div>
 </main>
