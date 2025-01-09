@@ -82,7 +82,26 @@ class User {
             return false;
         }
     }
-
-    
+    public function total_users($pdo){
+        $sql = "SELECT COUNT(*) as 'total' FROM users";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
+    public function total_author($pdo){
+        $sql = "SELECT COUNT(*) as 'total' from users WHERE role = 'author'";
+        $stmt = $pdo->prepare($sql) ;
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
+    public function total_new_users($pdo){
+        $sql = "SELECT COUNT(*) as 'total' from users WHERE role = 'user'";
+        $stmt = $pdo->prepare($sql) ;
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
 }
 ?>
