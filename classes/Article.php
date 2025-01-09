@@ -132,19 +132,34 @@ class article{
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':status', $status, \PDO::PARAM_STR);
         $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
-        
-        // try {
-
         $valur = $stmt->execute(); 
         print_r($valur);
         return $valur;
-        // } catch (PDOException $e) {
-        //     error_log("Erreur : " . $e->getMessage()); 
-        //     return false;
-        // }
+
     }
-    
-    
+
+    public function toutal_articcle($pdo) {
+        $sql = "SELECT COUNT(*) AS total FROM articles";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(); 
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
+
+    public function toutal_articcle_accept($pdo){
+        $sql = "SELECT count(*) AS total FROM articles WHERE status = 'active' ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
+    public function toutal_articcle_atonte($pdo){
+        $sql = "SELECT count(*) AS total FROM articles WHERE status = 'attente' ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
 }
 
 

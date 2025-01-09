@@ -1,3 +1,19 @@
+<?php 
+require_once dirname(__FILE__, 2).'/vendor/autoload.php';
+require_once dirname(__FILE__, 2).'/classes/Article.php';
+
+use Config\Database;
+$conn = new Database();
+$conction = $conn->getConnection();
+$article = new article();
+$toutal_article = $article->toutal_articcle($conction);
+$toutal_articcle_accept = $article->toutal_articcle_accept($conction);
+$toutal_articcle_atonte = $article->toutal_articcle_atonte($conction);
+
+
+echo $toutal_articcle_accept;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -128,7 +144,7 @@
                                 </div>
                                 <div class="flex-1 text-right md:text-center">
                                     <h2 class="font-bold uppercase text-gray-600">Toutal article </h2>
-                                   <p class="font-bold text-3xl">3249 <span class="text-green-500"><i class="fas fa-caret-up"></i></span></p>
+                                   <p class="font-bold text-3xl"><?php echo ($toutal_article); ?> <span class="text-green-500"><i class="fas fa-caret-up"></i></span></p>
                                 </div>
                             </div>
                         </div>
@@ -143,7 +159,7 @@
                                 </div>
                                 <div class="flex-1 text-right md:text-center">
                                     <h2 class="font-bold uppercase text-gray-600">articles accepte</h2>
-                                    <p class="font-bold text-3xl">249 <span class="text-pink-500"><i class="fas fa-exchange-alt"></i></span></p>
+                                    <p class="font-bold text-3xl"><?php echo $toutal_articcle_accept?> <span class="text-pink-500"><i class="fas fa-exchange-alt"></i></span></p>
                                 </div>
                             </div>
                         </div>
@@ -158,7 +174,7 @@
                                 </div>
                                 <div class="flex-1 text-right md:text-center">
                                     <h2 class="font-bold uppercase text-gray-600">list d'attentes</h2>
-                                    <p class="font-bold text-3xl">2 <span class="text-yellow-600"><i class="fas fa-caret-up"></i></span></p>
+                                    <p class="font-bold text-3xl"> <?php echo $toutal_articcle_atonte ?> <span class="text-yellow-600"><i class="fas fa-caret-up"></i></span></p>
                                 </div>
                             </div>
                         </div>

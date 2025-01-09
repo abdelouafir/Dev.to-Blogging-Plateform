@@ -10,10 +10,9 @@ $conn = new Database();
 $conction = $conn->getConnection();
 $article = new article();
 $articles = $article->ajoute_article($conction);
+$toutal_article = $article->toutal_articcle($conction);
+// echo ($toutal_article);
  
-
-
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['supprimer_id'])) {
     $id = $_POST['supprimer_id'];
