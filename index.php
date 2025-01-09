@@ -1,6 +1,25 @@
-
-
 <?php
+require_once dirname(__FILE__, 1).'/vendor/autoload.php';
+require_once dirname(__FILE__, 1).'/classes/Article.php';
+require_once dirname(__FILE__, 1).'/classes/User.php';
+require_once dirname(__FILE__, 1).'/classes/category.php';
+require_once dirname(__FILE__, 1).'/classes/DynamicCrud.php';
+
+
+
+
+use Config\Database;
+$conn = new Database();
+$conction = $conn->getConnection();
+$article = new article();
+$users_updt = new User();
+$categorys = new category();
+$tags = new DynamicCrud();
+
+$toutal_article = $article->toutal_articcle($conction);
+$toutal_users = $users_updt->total_users($conction);
+$toutal_categorys = $categorys->total_categorys($conction);
+$toutal_tags = $tags->totale_tags($conction);
 
  ?>
 
@@ -131,25 +150,25 @@
 
                         <!-- Statistiques générales -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                            <!-- Card Stage -->
+                            <!-- Card article -->
                             <div class="bg-white p-6 rounded-lg shadow-md">
                                 <h2 class="text-xl font-semibold text-gray-700">articles</h2>
-                                <p class="text-3xl font-bold text-blue-500 mt-4">12</p>
+                                <p class="text-3xl font-bold text-blue-500 mt-4"><?php echo $toutal_article ?></p>
                             </div>
                             <!-- Card Utilisateurs -->
                             <div class="bg-white p-6 rounded-lg shadow-md">
                                 <h2 class="text-xl font-semibold text-gray-700">Utilisateurs</h2>
-                                <p class="text-3xl font-bold text-green-500 mt-4">45</p>
+                                <p class="text-3xl font-bold text-green-500 mt-4"><?php echo $toutal_users ?></p>
                             </div>
                             <!-- Card Catégories -->
                             <div class="bg-white p-6 rounded-lg shadow-md">
                                 <h2 class="text-xl font-semibold text-gray-700">Catégories</h2>
-                                <p class="text-3xl font-bold text-purple-500 mt-4">8</p>
+                                <p class="text-3xl font-bold text-purple-500 mt-4"><?php echo $toutal_categorys ?></p>
                             </div>
                             <!-- Card Tags -->
                             <div class="bg-white p-6 rounded-lg shadow-md">
                                 <h2 class="text-xl font-semibold text-gray-700">Tags</h2>
-                                <p class="text-3xl font-bold text-red-500 mt-4">23</p>
+                                <p class="text-3xl font-bold text-red-500 mt-4"><?php echo $toutal_tags ?></p>
                             </div>
                         </div>
 
@@ -167,27 +186,35 @@
                                 </thead>
                                 <tbody>
                                     <tr class="hover:bg-gray-100">
-                                        <td class="border border-gray-300 px-4 py-2">Stage 1</td>
-                                        <td class="border border-gray-300 px-4 py-2">Stage</td>
-                                        <td class="border border-gray-300 px-4 py-2">5</td>
+                                        <td class="border border-gray-300 px-4 py-2">article </td>
+                                        <td class="border border-gray-300 px-4 py-2">article</td>
+                                        <td class="border border-gray-300 px-4 py-2"><?php echo $toutal_article  ?></td>
                                         <td class="border border-gray-300 px-4 py-2">
-                                            <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Voir</button>
+                                            <a href="/assets/php/table-artickles.php" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">voir détailles</a>
                                         </td>
                                     </tr>
                                     <tr class="hover:bg-gray-100">
-                                        <td class="border border-gray-300 px-4 py-2">Utilisateur 1</td>
                                         <td class="border border-gray-300 px-4 py-2">Utilisateur</td>
-                                        <td class="border border-gray-300 px-4 py-2">12</td>
+                                        <td class="border border-gray-300 px-4 py-2">Utilisateur</td>
+                                        <td class="border border-gray-300 px-4 py-2"><?php echo $toutal_users ?></td>    
                                         <td class="border border-gray-300 px-4 py-2">
-                                            <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Voir</button>
+                                            <a href="/assets/php/table.php" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">voir détailles</a>
                                         </td>
                                     </tr>
                                     <tr class="hover:bg-gray-100">
-                                        <td class="border border-gray-300 px-4 py-2">Catégorie A</td>
+                                        <td class="border border-gray-300 px-4 py-2">Catégorie </td>
                                         <td class="border border-gray-300 px-4 py-2">Catégorie</td>
-                                        <td class="border border-gray-300 px-4 py-2">3</td>
+                                        <td class="border border-gray-300 px-4 py-2"><?php echo $toutal_categorys ?></td>
                                         <td class="border border-gray-300 px-4 py-2">
-                                            <button class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Voir</button>
+                                            <a href="/assets/php/category_vew.php" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">voir détailles</a>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-100">
+                                        <td class="border border-gray-300 px-4 py-2">tags </td>
+                                        <td class="border border-gray-300 px-4 py-2">tags</td>
+                                        <td class="border border-gray-300 px-4 py-2"><?php echo $toutal_tags ?></td>
+                                        <td class="border border-gray-300 px-4 py-2">
+                                             <a href="/assets/php/tags.php" class="bg-blue-300 text-white px-4 py-2 rounded hover:bg-blue-400">voir détailles</a>
                                         </td>
                                     </tr>
                                 </tbody>

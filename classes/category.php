@@ -39,5 +39,14 @@ class category {
       $stmt->execute(); 
       return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+
+    public function  total_categorys($pdo){
+      $sql = "SELECT COUNT(*) as 'total' FROM categories";
+      $stmt = $pdo->prepare($sql);
+      $stmt->execute();
+      $resolte = $stmt->fetch(PDO::FETCH_ASSOC);
+      return $resolte['total'];
+    }
 }
 ?>

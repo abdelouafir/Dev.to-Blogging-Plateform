@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title'])) {
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
     $id = $_POST['id']; 
-    // $id = $_POST['id']; 
     $delete = DynamicCrud::delete_tage($conction,$id);
 }
 

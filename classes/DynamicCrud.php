@@ -50,6 +50,17 @@ public static function get_tag($pdo, $id) {
 
   return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
+public function totale_tags($pdo){
+  $sql = "SELECT COUNT(*) AS 'totale' FROM tags";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute();
+  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+  return $result['totale'];
+
 }
+}
+
+
 
 ?>
