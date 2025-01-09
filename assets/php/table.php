@@ -13,11 +13,19 @@ $users_updt = new User();
 $users = $users_updt->get_all_users($conction);
 $article_get = new article();
 $articles = $article_get->ajoute_article($conction);
+
+session_start();
+$data = $_SESSION['user'] ;
+if($data['role'] == 'admin'){
+   echo "data exeste";
+}else{
+   header("location: ../../vew/login.php");
+}
 // var_dump($users);
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['supprimer_id'])) {
     $id = $_POST['supprimer_id'];
     if ($users_updt->delete_user($conction, $id)) {
-        header("Location: ../../includes/mangment_users.php");
+        header("Location: ./table.php");
         exit;
     } 
 }if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_id'])) {
@@ -98,13 +106,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['supprimer_id'])) {
                                         <i class="fa-solid fa-circle-check" style="color: #1662e3;"></i>
                                     </button> -->
                                 <div class="flex justify-center space-x-4">
-                                    <form action="../assets/php/table.php" method="POST">
+                                    <form action="./table.php" method="POST">
                                         <input type="hidden" name="update_id" value="<?php echo $user['id']; ?>">
                                         <button class=" text-white px-4 py-2 rounded hover:bg-blue-600 transition">
                                         <i class="fa-solid fa-circle-check" style="color: #1662e3;"></i>
                                     </button>
                                     </form>
-                                    <form action="../assets/php/table.php" method="POST">
+                                    <form action="./table.php" method="POST">
                                         <input type="hidden" name="supprimer_id" value="<?php echo $user['id']; ?>">
                                         <button class="text-white px-4 py-2 rounded hover:bg-red-600 transition">
                                         <i class="fa-solid fa-user-minus" style="color: #ff0000;"></i>

@@ -19,6 +19,8 @@ if (!$id && isset($_SESSION['user']['id'])) {
     echo "ID utilisateur récupéré depuis la session: " . $id;
 } elseif ($id) {
     echo "ID de l'article récupéré depuis l'URL: " . $id;
+}else{
+    header("location: ../../vew/login.php");
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -6,8 +6,6 @@ require_once dirname(__FILE__, 1).'/classes/category.php';
 require_once dirname(__FILE__, 1).'/classes/DynamicCrud.php';
 
 
-
-
 use Config\Database;
 $conn = new Database();
 $conction = $conn->getConnection();
@@ -20,6 +18,16 @@ $toutal_article = $article->toutal_articcle($conction);
 $toutal_users = $users_updt->total_users($conction);
 $toutal_categorys = $categorys->total_categorys($conction);
 $toutal_tags = $tags->totale_tags($conction);
+
+session_start();
+ $data = $_SESSION['user'] ;
+// var_dump($data);
+echo $data['role']; 
+if($data['role'] == 'admin'){
+    echo "data exeste";
+}else{
+    header("location: ./vew/login.php");
+}
 
  ?>
 
@@ -110,17 +118,17 @@ $toutal_tags = $tags->totale_tags($conction);
                             </a>
                         </li> -->
                         <li class="mr-3 flex-1">
-                            <a href="./vew/articles-page.php" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
-                            <i class="fa-solid fa-house-chimney md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">articles</span>
+                            <a href="./index.php" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
+                            <i class="fa-solid fa-house-chimney md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">home</span>
                             </a>
                         </li>
                         <li class="mr-3 flex-1">
-                            <a href="./includes/mangment_users.php" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
+                            <a href="./assets/php/table.php" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
                                 <i class="fas fa-chart-area pr-0 md:pr-3 text-blue-600"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">mangement users</span>
                             </a>
                         </li>
                         <li class="mr-3 flex-1">
-                            <a href="./includes/management_artickles.php" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
+                            <a href="./assets/php/table-artickles.php" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
                                 <i class="fa-solid fa-list-check pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">mangement artic</span>
                             </a>
                         </li>

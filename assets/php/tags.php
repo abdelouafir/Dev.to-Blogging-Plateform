@@ -11,6 +11,14 @@ $conction = $conn->getConnection();
 $ins = new DynamicCrud();
 $tags = $ins->get_tags($conction);
 
+session_start();
+$data = $_SESSION['user'] ;
+if($data['role'] == 'admin'){
+   echo "data exeste";
+}else{
+   header("location: ../../vew/login.php");
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title'])) {
     $tags = $_POST['title']; 
     // $id = $_POST['id']; 

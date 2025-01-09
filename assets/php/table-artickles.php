@@ -1,7 +1,5 @@
 <?php
 
-ob_start();
-
 require_once dirname(__FILE__, 3).'/vendor/autoload.php';
 require_once dirname(__FILE__, 3).'/classes/Article.php';
 
@@ -12,7 +10,15 @@ $article = new article();
 $articles = $article->ajoute_article($conction);
 $toutal_article = $article->toutal_articcle($conction);
 // echo ($toutal_article);
- 
+session_start();
+$data = $_SESSION['user'] ;
+var_dump($data);
+echo $data['role']; 
+if($data['role'] == 'admin'){
+   echo "data exeste";
+}else{
+   header("location: ../../vew/login.php");
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['supprimer_id'])) {
     $id = $_POST['supprimer_id'];
@@ -29,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['supprimer_id'])) {
     } 
 }
 
-ob_end_flush(); 
 ?>
 <!DOCTYPE html>
 <html lang="fr">
