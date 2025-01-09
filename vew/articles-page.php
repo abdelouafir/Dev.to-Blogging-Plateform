@@ -11,7 +11,6 @@ $articles_active =  $article->get_les_articles_active($conction);
 
 session_start();
  $data = $_SESSION['user'] ;
-var_dump($data);
 
 
  ?>
@@ -37,8 +36,8 @@ var_dump($data);
                 <li><a href="#" class="block text-lg text-gray-400 hover:text-white transition">Articles</a></li>
                 <li><a href="#" class="block text-lg text-gray-400 hover:text-white transition">À propos</a></li>
                 <li><a href="#" class="block text-lg text-gray-400 hover:text-white transition">Contact</a></li>
-                <li><a href="logout.php" class="bg-red-600 text-white py-2 px-6 rounded-full shadow-lg hover:bg-red-700 transition">Se déconnecter</a></li>
-                <li><a href="../assets/php/form.php?id=<?php echo $_SESSION['user']['id']; ?>" class="bg-red-600 text-white py-2 px-6 rounded-full shadow-lg hover:bg-red-700 transition">Se déconnecter</a></li>
+                <li><a href="./logout.php" class="bg-red-600 text-white py-2 px-6 rounded-full shadow-lg hover:bg-red-700 transition">quité</a></li>
+                <li><a href="../assets/php/form.php?id=<?php echo $_SESSION['user']['id']; ?>" class="bg-green-600 text-white py-2 px-6 rounded-full shadow-lg hover:bg-red-700 transition">create article</a></li>
 
             </ul>
         </nav>

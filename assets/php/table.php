@@ -1,7 +1,5 @@
 <?php 
 // namespace App\table;
-
-var_dump(dirname(__FILE__,3));
 require_once dirname(__FILE__, 3).'/vendor/autoload.php';
 require_once dirname(__FILE__, 3).'/classes/User.php';
 require_once dirname(__FILE__, 3).'/classes/Article.php';

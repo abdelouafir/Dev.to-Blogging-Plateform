@@ -103,5 +103,23 @@ class User {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['total'];
     }
+
+    public static function searchContent($pdo, $query)
+    {
+        $sql = "
+            (SELECT 'article' AS type, id, title AS name, NULL AS slug FROM articles WHERE title LIKE :query)
+            UNION 
+            (SELECT 'category' AS type, id, name AS name, NULL AS slug FROM categories WHERE name LIKE :query)
+            UNION 
+            (SELECT 'tag' AS type, id, name AS name, NULL AS slug FROM tags WHERE name LIKE :query)
+        ";
+    
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':query', '%' . $query . '%');
+        $stmt->execute();
+    
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
 }
 ?>

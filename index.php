@@ -19,6 +19,7 @@ $toutal_users = $users_updt->total_users($conction);
 $toutal_categorys = $categorys->total_categorys($conction);
 $toutal_tags = $tags->totale_tags($conction);
 
+
 session_start();
  $data = $_SESSION['user'] ;
 // var_dump($data);
@@ -26,9 +27,14 @@ echo $data['role'];
 if($data['role'] == 'admin'){
     echo "data exeste";
 }else{
-    header("location: ./vew/login.php");
+    header("location: ./vew/articles-page.php");
 }
 
+
+if (isset($_POST['query'])) {
+    $query = $_POST['query'];
+    $recherch = $users_updt->searchContent($conction,$query);
+}
  ?>
 
 <!DOCTYPE html>
@@ -63,7 +69,11 @@ if($data['role'] == 'admin'){
 
             <div class="flex flex-1 md:w-1/3 justify-center md:justify-start text-white px-2">
                 <span class="relative w-full">
-                    <input aria-label="search" type="search" id="search" placeholder="Search" class="w-full bg-gray-900 text-white transition border border-transparent focus:outline-none focus:border-gray-400 rounded py-3 px-2 pl-10 appearance-none leading-normal">
+                    <!-- <input aria-label="search" type="search" id="search" placeholder="Search" class="w-full bg-gray-900 text-white transition border border-transparent focus:outline-none focus:border-gray-400 rounded py-3 px-2 pl-10 appearance-none leading-normal"> -->
+                    <form method="POST">
+                        <input type="text" name="query" placeholder="Rechercher..." required  class="w-full bg-gray-900 text-white transition border border-transparent focus:outline-none focus:border-gray-400 rounded py-3 px-2 pl-10 appearance-none leading-normal">
+                        <button type="submit" name="search">Rechercher</button>
+                    </form>
                     <div class="absolute search-icon" style="top: 1rem; left: .8rem;">
                         <svg class="fill-current pointer-events-none text-white w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
@@ -71,6 +81,8 @@ if($data['role'] == 'admin'){
                     </div>
                 </span>
             </div>
+
+
 
             <div class="flex w-full pt-2 content-center justify-between md:w-1/3 md:justify-end">
                 <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
@@ -105,6 +117,22 @@ if($data['role'] == 'admin'){
 
 
 <main>
+<main>
+ <?php if (isset($recherch) && !empty($recherch)): ?>
+        <h2>Résultats de recherche :</h2>
+        <ul>
+            <?php foreach ($recherch as $result): ?>
+                <li>
+                    [<?php echo htmlspecialchars($result['type']); ?>] 
+                    <a href="<?php echo htmlspecialchars($result['slug'] ?: '#'); ?>">
+                        <?php echo htmlspecialchars($result['name']); ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <h2>Aucun résultat trouvé.</h2> 
+    <?php endif; ?>
 
     <div class="flex flex-col md:flex-row">
         <nav aria-label="alternative nav">

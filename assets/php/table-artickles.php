@@ -12,8 +12,6 @@ $toutal_article = $article->toutal_articcle($conction);
 // echo ($toutal_article);
 session_start();
 $data = $_SESSION['user'] ;
-var_dump($data);
-echo $data['role']; 
 if($data['role'] == 'admin'){
    echo "data exeste";
 }else{

@@ -13,6 +13,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $email = $_POST['email'];
     $password = $_POST['password'];
     $user_calass->insert($conction,$userNume,$email,$password);
+    header("location: ./login.php");
 }
  ?>
 
