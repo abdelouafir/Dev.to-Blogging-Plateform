@@ -19,7 +19,6 @@ class article{
         $sql = "INSERT INTO articles (title, content, category_id, author_id, views)
                 VALUES (:title, :content, :category_id, :author_id, :views)";
         $stmt = $pdo->prepare($sql);
-        
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':content', $content);
         $stmt->bindParam(':category_id', $category_id);
@@ -127,19 +126,22 @@ class article{
     public function update_status($pdo, $id) {
         $status = 'active';
         $sql = "UPDATE articles 
-                SET role = :role
+                SET status = :status
                 WHERE id = :id";
     
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':role', $status, PDO::PARAM_STR);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    
-        try {
-            return $stmt->execute(); 
-        } catch (PDOException $e) {
-            error_log("Erreur : " . $e->getMessage()); 
-            return false;
-        }
+        $stmt->bindParam(':status', $status, \PDO::PARAM_STR);
+        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+        
+        // try {
+
+        $valur = $stmt->execute(); 
+        print_r($valur);
+        return $valur;
+        // } catch (PDOException $e) {
+        //     error_log("Erreur : " . $e->getMessage()); 
+        //     return false;
+        // }
     }
     
     

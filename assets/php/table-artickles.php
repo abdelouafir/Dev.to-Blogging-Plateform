@@ -1,11 +1,20 @@
-<?php 
+<?php
+
+ob_start();
+
 require_once dirname(__FILE__, 3).'/vendor/autoload.php';
 require_once dirname(__FILE__, 3).'/classes/Article.php';
+
 use Config\Database;
 $conn = new Database();
 $conction = $conn->getConnection();
 $article = new article();
 $articles = $article->ajoute_article($conction);
+ 
+
+
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['supprimer_id'])) {
     $id = $_POST['supprimer_id'];
     if ($article->suprmre_article($conction, $id)) {
@@ -13,16 +22,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['supprimer_id'])) {
         exit;
     } 
 }else if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_id'])){
-    $id = $_POST['update_id'];
+       $id = $_POST['update_id'];
+
     if ($article->update_status($conction, $id)) {
-        header("Location: ./table-artickles.php");
-        exit;
+        // header("Location: ./table-artickles.php");
+        // exit;
     } 
 }
-// var_dump($articles);
-// session_start();
-// var_dump($_SESSION['user']);
-// var_dump($_SESSION['user']['id']);
+
+ob_end_flush(); 
 ?>
 <!DOCTYPE html>
 <html lang="fr">

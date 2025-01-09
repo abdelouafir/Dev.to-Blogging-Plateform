@@ -1,26 +1,44 @@
 <?php 
 require_once dirname(__FILE__, 3).'/vendor/autoload.php';
 require_once dirname(__FILE__, 3).'/classes/Article.php';
+
 use Config\Database;
 $conn = new Database();
 $conction = $conn->getConnection();
-$article = new article();
+$article = new Article();
 $category = $article->get_categories($conction);
 $tags = $article->get_tags($conction);
 
+session_start();
 
+
+$id = isset($_GET['id']) ? $_GET['id'] : null;
+
+if (!$id && isset($_SESSION['user']['id'])) {
+    $id = $_SESSION['user']['id'];
+    echo "ID utilisateur récupéré depuis la session: " . $id;
+} elseif ($id) {
+    echo "ID de l'article récupéré depuis l'URL: " . $id;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $auter = 1;
+
+    $author = $id; 
     $title = $_POST['title'];  
     $content = $_POST['content'];  
     $categories = $_POST['categories'];  
     $tags = $_POST['tags'] ?? [];  
-    $article->add_article($conction,$title,$content,$categories,$auter);
-    $article_id = $article->add_article($conction,$title,$content,$categories,$auter);
-    $article->create_tag($conction,$article_id,$tags);
+
+    $article_id = $article->add_article($conction, $title, $content, $categories, $author);
+
+    if ($article_id) {
+        $article->create_tag($conction, $article_id, $tags);
+    } else {
+        echo "Erreur lors de l'ajout de l'article.";
+    }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
